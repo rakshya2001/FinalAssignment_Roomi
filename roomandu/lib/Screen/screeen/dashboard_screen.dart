@@ -30,7 +30,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
             icon: Icon(Icons.home),
             label: 'Home',
             ),
+            BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Login',
+            ),
+            BottomNavigationBarItem(
+            icon: Icon(Icons.cloud_circle),
+            label: 'Register',
+            ),
         ],
+        
       ),
     );
   }
