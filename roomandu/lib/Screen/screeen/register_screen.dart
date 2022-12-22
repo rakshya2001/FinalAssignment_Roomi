@@ -18,7 +18,7 @@ class RegisterScreen extends StatelessWidget {
                 "REGISTER",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF2661FA),
+                  color: Color.fromARGB(255, 250, 38, 38),
                   fontSize: 36
                 ),
                 textAlign: TextAlign.left,
