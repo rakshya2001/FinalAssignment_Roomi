@@ -3,12 +3,17 @@
 
 import 'package:flutter/material.dart';
 import 'package:roomandu/Screen/screeen/login_screen.dart';
+import 'package:roomandu/Screen/screeen/register_screen.dart';
+import 'package:roomandu/Screen/screeen/splash.dart';
 void main() {
   runApp(
     MaterialApp(
-      initialRoute: '/login',
+      initialRoute: '/',
       routes: {
-        '/login':(context) =>  const ClassLoginScreen()
+        '/':(context) => const SplashScreen(),
+        '/loginscreen':(context) =>  const LoginScreen(),
+        '/registerscreen':(context) => RegisterScreen()
+        
 
       },
     debugShowCheckedModeBanner: false,
