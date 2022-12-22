@@ -10,13 +10,9 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  final int _selectIndex=0;
+  int _selectIndex = 0;
 
-  List<Widget> lstBottomScreen=[
-    const LoginScreen(),
-    RegisterScreen()
-
-  ];
+  List<Widget> lstBottomScreen = [const LoginScreen(), RegisterScreen()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,17 +25,25 @@ class _DashboardScreenState extends State<DashboardScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
-            ),
-            BottomNavigationBarItem(
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Login',
-            ),
-            BottomNavigationBarItem(
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.cloud_circle),
             label: 'Register',
-            ),
+          ),
         ],
-        
+        backgroundColor: Colors.amber,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.black,
+        currentIndex: _selectIndex,
+        onTap: (index) {
+          setState(() {
+            _selectIndex = index;
+          });
+        },
       ),
     );
   }
