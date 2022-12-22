@@ -23,11 +23,11 @@ class LoginScreen extends StatelessWidget {
                       Icons.person_outline_rounded,
                       color: Colors.grey,
                     ),
-        
+
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-        
+
                     focusedBorder: OutlineInputBorder(
                       borderSide:
                           const BorderSide(color: Colors.blue, width: 1.0),
@@ -44,11 +44,11 @@ class LoginScreen extends StatelessWidget {
                       Icons.person_outline_rounded,
                       color: Colors.grey,
                     ),
-        
+
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-        
+
                     focusedBorder: OutlineInputBorder(
                       borderSide:
                           const BorderSide(color: Colors.blue, width: 1.0),
@@ -65,23 +65,18 @@ class LoginScreen extends StatelessWidget {
                     ..borderRadius(all: 16)
                     ..background.color(const Color.fromARGB(255, 152, 11, 25)),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Txt(
-                        "Login",
-                        style: TxtStyle()
-                          ..fontSize(20)
-                          ..alignmentContent.center(true)
-                          ..fontWeight(FontWeight.bold)
-                          ..textColor(Colors.white),
-                      ),
-                    ],
-                  ),
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        ElevatedButton(
+                            onPressed: () {}, child: const Text("Login")),
+                        const SizedBox(height: 22),
+                        ElevatedButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/registerscreen');
+                            },
+                            child: const Text("Register"))
+                      ]),
                 ),
-                const SizedBox(height: 22),
-                ElevatedButton(onPressed: (){
-                  
-                }, child: const Text("Register"))
               ],
             ),
           ),
