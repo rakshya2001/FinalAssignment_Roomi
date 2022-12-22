@@ -10,7 +10,14 @@ class RegisterScreen extends StatelessWidget {
     return Scaffold(
       body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: [
+            Center(
+            child: Image.asset('assets/images/roomi.png',
+            width:250,
+            height:200,
+            fit:BoxFit.fitHeight),
+          ),
+        
             Container(
               alignment: Alignment.centerLeft,
               padding: const EdgeInsets.symmetric(horizontal: 40),

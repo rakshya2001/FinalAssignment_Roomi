@@ -10,7 +10,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-Future.delayed(const Duration(seconds: 15),(){
+Future.delayed(const Duration(seconds: 7),(){
       Navigator.pushReplacementNamed(context,'/loginscreen');
     });
     super.initState();    super.initState();
