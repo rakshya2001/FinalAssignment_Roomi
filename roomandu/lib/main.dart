@@ -2,6 +2,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:roomandu/Screen/screeen/dashboard_screen.dart';
 import 'package:roomandu/Screen/screeen/login_screen.dart';
 import 'package:roomandu/Screen/screeen/register_screen.dart';
 import 'package:roomandu/Screen/screeen/splash.dart';
@@ -12,7 +13,8 @@ void main() {
       routes: {
         '/':(context) => const SplashScreen(),
         '/loginscreen':(context) =>  const LoginScreen(),
-        '/registerscreen':(context) => RegisterScreen()
+        '/registerscreen':(context) => RegisterScreen(),
+        '/dashboardscreen':(context) => DashboardScreen()
         
 
       },

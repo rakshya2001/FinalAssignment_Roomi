@@ -128,7 +128,7 @@ class RegisterScreen extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF2661FA)
+                    color: Colors.orange
                   ),
                 ),
               ),

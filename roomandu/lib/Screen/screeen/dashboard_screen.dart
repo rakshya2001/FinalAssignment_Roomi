@@ -35,7 +35,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             label: 'Register',
           ),
         ],
-        backgroundColor: Colors.amber,
+        backgroundColor: Colors.green,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.black,
         currentIndex: _selectIndex,
