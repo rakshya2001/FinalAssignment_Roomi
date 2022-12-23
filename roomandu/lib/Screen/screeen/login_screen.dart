@@ -29,7 +29,7 @@ class LoginScreen extends StatelessWidget {
                 "LOGIN",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 250, 38, 38),
+                  color: Color.fromARGB(255, 255, 136, 34),
                   fontSize: 36
                 ),
                 textAlign: TextAlign.left,
@@ -67,7 +67,7 @@ class LoginScreen extends StatelessWidget {
                 "Forgot your password?",
                 style: TextStyle(
                   fontSize: 12,
-                  color: Color(0XFF2661FA)
+                  color: Color.fromARGB(255, 255, 136, 34)
                 ),
               ),
             ),
@@ -87,7 +87,7 @@ class LoginScreen extends StatelessWidget {
                   height: 50.0,
                   width: size.width * 0.5,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(80.0),
+                    borderRadius: BorderRadius.circular(100.0),
                     gradient: const LinearGradient(
                       colors: [
                         Color.fromARGB(255, 255, 136, 34),
@@ -119,7 +119,7 @@ class LoginScreen extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
-                    color:Colors.black
+                    color:Colors.orange
                   ),
                 ),
               ),
