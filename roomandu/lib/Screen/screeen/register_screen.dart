@@ -3,6 +3,7 @@ import 'package:motion_toast/motion_toast.dart';
 import 'package:roomandu/data_source/local_data_source/role_data_source.dart';
 import 'package:roomandu/model/role.dart';
 import 'package:roomandu/model/user.dart';
+import 'package:roomandu/repository/user_repo.dart';
 
 import 'login_screen.dart';
 
@@ -48,6 +49,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
       _usernameController.text,
       _passwordController.text,
     );
+
+    int status = await  UserRepositoryImpl().addUser(user);
+    _showMessage(status);
   }
 
   @override
