@@ -2,11 +2,14 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:roomandu/helper/objectbox.dart';
+import 'package:roomandu/state/objectbox_state.dart';
 
 import 'app/app.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  ObjectBoxState.objectBoxInstance= await ObjectBoxInstance.init();
   //create an Object for ObjectBoxInstance
 
   runApp(
