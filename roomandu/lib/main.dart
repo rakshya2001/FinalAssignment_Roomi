@@ -13,8 +13,7 @@ void main() async{
   //create an Object for ObjectBoxInstance
 
   runApp(
-    const MyApp(),
-  );
+    const MyApp());
 }
 
 // class MeroClassScreen extends StatelessWidget {

@@ -4,33 +4,38 @@
   "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
   "entities": [
     {
-      "id": "1:5265153078840510103",
-      "lastPropertyId": "5:5617509485799528654",
+      "id": "1:1804234227331903897",
+      "lastPropertyId": "6:944238387801549330",
       "name": "User",
       "properties": [
         {
-          "id": "1:631447944217703083",
+          "id": "1:7235273234236947273",
           "name": "userId",
           "type": 6,
           "flags": 129
         },
         {
-          "id": "2:1401627693913308761",
+          "id": "2:7558905345642882435",
           "name": "fname",
           "type": 9
         },
         {
-          "id": "3:6796370039515237307",
+          "id": "3:761170410792412423",
           "name": "lname",
           "type": 9
         },
         {
-          "id": "4:204771316065944657",
+          "id": "4:2854935816122347427",
           "name": "username",
           "type": 9
         },
         {
-          "id": "5:5617509485799528654",
+          "id": "5:1548176190062946307",
+          "name": "number",
+          "type": 9
+        },
+        {
+          "id": "6:944238387801549330",
           "name": "password",
           "type": 9
         }
@@ -38,7 +43,7 @@
       "relations": []
     }
   ],
-  "lastEntityId": "1:5265153078840510103",
+  "lastEntityId": "1:1804234227331903897",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",

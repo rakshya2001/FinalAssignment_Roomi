@@ -20,33 +20,38 @@ export 'package:objectbox/objectbox.dart'; // so that callers only have to impor
 
 final _entities = <ModelEntity>[
   ModelEntity(
-      id: const IdUid(1, 5265153078840510103),
+      id: const IdUid(1, 1804234227331903897),
       name: 'User',
-      lastPropertyId: const IdUid(5, 5617509485799528654),
+      lastPropertyId: const IdUid(6, 944238387801549330),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
-            id: const IdUid(1, 631447944217703083),
+            id: const IdUid(1, 7235273234236947273),
             name: 'userId',
             type: 6,
             flags: 129),
         ModelProperty(
-            id: const IdUid(2, 1401627693913308761),
+            id: const IdUid(2, 7558905345642882435),
             name: 'fname',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(3, 6796370039515237307),
+            id: const IdUid(3, 761170410792412423),
             name: 'lname',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(4, 204771316065944657),
+            id: const IdUid(4, 2854935816122347427),
             name: 'username',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(5, 5617509485799528654),
+            id: const IdUid(5, 1548176190062946307),
+            name: 'number',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(6, 944238387801549330),
             name: 'password',
             type: 9,
             flags: 0)
@@ -75,7 +80,7 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(1, 5265153078840510103),
+      lastEntityId: const IdUid(1, 1804234227331903897),
       lastIndexId: const IdUid(0, 0),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
@@ -100,13 +105,15 @@ ModelDefinition getObjectBoxModel() {
           final fnameOffset = fbb.writeString(object.fname);
           final lnameOffset = fbb.writeString(object.lname);
           final usernameOffset = fbb.writeString(object.username);
+          final numberOffset = fbb.writeString(object.number);
           final passwordOffset = fbb.writeString(object.password);
-          fbb.startTable(6);
+          fbb.startTable(7);
           fbb.addInt64(0, object.userId);
           fbb.addOffset(1, fnameOffset);
           fbb.addOffset(2, lnameOffset);
           fbb.addOffset(3, usernameOffset);
-          fbb.addOffset(4, passwordOffset);
+          fbb.addOffset(4, numberOffset);
+          fbb.addOffset(5, passwordOffset);
           fbb.finish(fbb.endTable());
           return object.userId;
         },
@@ -121,6 +128,8 @@ ModelDefinition getObjectBoxModel() {
                   .vTableGet(buffer, rootOffset, 8, ''),
               const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 10, ''),
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 14, ''),
               const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 12, ''),
               userId:
@@ -147,6 +156,9 @@ class User_ {
   /// see [User.username]
   static final username = QueryStringProperty<User>(_entities[0].properties[3]);
 
+  /// see [User.number]
+  static final number = QueryStringProperty<User>(_entities[0].properties[4]);
+
   /// see [User.password]
-  static final password = QueryStringProperty<User>(_entities[0].properties[4]);
+  static final password = QueryStringProperty<User>(_entities[0].properties[5]);
 }
