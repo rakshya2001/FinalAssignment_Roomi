@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:motion_toast/motion_toast.dart';
 import 'package:roomandu/data_source/local_data_source/role_data_source.dart';
 import 'package:roomandu/model/role.dart';
+import 'package:roomandu/model/user.dart';
 
 import 'login_screen.dart';
 
@@ -11,6 +13,12 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   late List<Role> _lstRoles = [];
+  late final String _dropDownValue= "";
+  final _key = GlobalKey<FormState>();
+  final _fnameController = TextEditingController(text: 'Rakshya');
+  final _lnameController = TextEditingController(text: 'Bhatta');
+  final _usernameController = TextEditingController(text: 'Rakshya');
+  final _passwordController = TextEditingController(text: 'rakshya123');
 
   @override
   void initState() {
@@ -21,6 +29,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   getAllRole() async {
     _lstRoles = await RoleDataSource().getAllRole();
+  }
+
+  _showMessage(int status){
+    if(status > 0){
+      MotionToast.success(description: const Text('User Added Successfully'),
+      ).show(context);
+    }else{
+      MotionToast.error(description: const Text('Error in adding role.'))
+      .show(context);
+    }
+  }
+
+  _saveUser() async{
+    User user = User(
+      _fnameController.text,
+      _lnameController.text,
+      _usernameController.text,
+      _passwordController.text,
+    );
   }
 
   @override
