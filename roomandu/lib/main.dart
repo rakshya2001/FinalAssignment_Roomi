@@ -2,26 +2,16 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:roomandu/Screen/screeen/dashboard_screen.dart';
-import 'package:roomandu/Screen/screeen/login_screen.dart';
-import 'package:roomandu/Screen/screeen/register_screen.dart';
-import 'package:roomandu/Screen/screeen/splash.dart';
-void main() {
-  runApp(
-    MaterialApp(
-      initialRoute: '/',
-      routes: {
-        '/':(context) => const SplashScreen(),
-        '/loginscreen':(context) =>  const LoginScreen(),
-        '/registerscreen':(context) => RegisterScreen(),
-        '/dashboardscreen':(context) => DashboardScreen()
-        
 
-      },
-    debugShowCheckedModeBanner: false,
-    
-    ),
-    );
+import 'app/app.dart';
+
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  //create an Object for ObjectBoxInstance
+
+  runApp(
+    const MyApp(),
+  );
 }
 
 // class MeroClassScreen extends StatelessWidget {
