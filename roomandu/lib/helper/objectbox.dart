@@ -35,4 +35,11 @@ class ObjectBoxInstance {
   List<Role> getAllRole() {
     return _role.getAll();
   }
+  int addUser(User user) {
+    return _user.put(user);
+  }
+
+  List<User> getAllUser() {
+    return _user.getAll();
+  }
 }
