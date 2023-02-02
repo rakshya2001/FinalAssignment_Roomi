@@ -22,37 +22,43 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(1, 1804234227331903897),
       name: 'User',
-      lastPropertyId: const IdUid(6, 944238387801549330),
+      lastPropertyId: const IdUid(10, 1978691702687235557),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
             id: const IdUid(1, 7235273234236947273),
             name: 'userId',
-            type: 6,
-            flags: 129),
-        ModelProperty(
-            id: const IdUid(2, 7558905345642882435),
-            name: 'fname',
             type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(3, 761170410792412423),
-            name: 'lname',
-            type: 9,
-            flags: 0),
+            flags: 2080,
+            indexId: const IdUid(1, 5144076723642793913)),
         ModelProperty(
             id: const IdUid(4, 2854935816122347427),
             name: 'username',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(5, 1548176190062946307),
-            name: 'number',
+            id: const IdUid(6, 944238387801549330),
+            name: 'password',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(6, 944238387801549330),
-            name: 'password',
+            id: const IdUid(7, 2144832638566631917),
+            name: 'uId',
+            type: 6,
+            flags: 129),
+        ModelProperty(
+            id: const IdUid(8, 2353302200629296688),
+            name: 'firstName',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(9, 6856895876520465934),
+            name: 'lastName',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(10, 1978691702687235557),
+            name: 'phoneNumber',
             type: 9,
             flags: 0)
       ],
@@ -81,12 +87,16 @@ ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
       lastEntityId: const IdUid(1, 1804234227331903897),
-      lastIndexId: const IdUid(0, 0),
+      lastIndexId: const IdUid(1, 5144076723642793913),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [],
       retiredIndexUids: const [],
-      retiredPropertyUids: const [],
+      retiredPropertyUids: const [
+        7558905345642882435,
+        761170410792412423,
+        1548176190062946307
+      ],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
@@ -102,38 +112,52 @@ ModelDefinition getObjectBoxModel() {
           object.userId = id;
         },
         objectToFB: (User object, fb.Builder fbb) {
-          final fnameOffset = fbb.writeString(object.fname);
-          final lnameOffset = fbb.writeString(object.lname);
-          final usernameOffset = fbb.writeString(object.username);
-          final numberOffset = fbb.writeString(object.number);
-          final passwordOffset = fbb.writeString(object.password);
-          fbb.startTable(7);
-          fbb.addInt64(0, object.userId);
-          fbb.addOffset(1, fnameOffset);
-          fbb.addOffset(2, lnameOffset);
+          final userIdOffset =
+              object.userId == null ? null : fbb.writeString(object.userId!);
+          final usernameOffset = object.username == null
+              ? null
+              : fbb.writeString(object.username!);
+          final passwordOffset = object.password == null
+              ? null
+              : fbb.writeString(object.password!);
+          final firstNameOffset = object.firstName == null
+              ? null
+              : fbb.writeString(object.firstName!);
+          final lastNameOffset = object.lastName == null
+              ? null
+              : fbb.writeString(object.lastName!);
+          final phoneNumberOffset = object.phoneNumber == null
+              ? null
+              : fbb.writeString(object.phoneNumber!);
+          fbb.startTable(11);
+          fbb.addOffset(0, userIdOffset);
           fbb.addOffset(3, usernameOffset);
-          fbb.addOffset(4, numberOffset);
           fbb.addOffset(5, passwordOffset);
+          fbb.addInt64(6, object.uId);
+          fbb.addOffset(7, firstNameOffset);
+          fbb.addOffset(8, lastNameOffset);
+          fbb.addOffset(9, phoneNumberOffset);
           fbb.finish(fbb.endTable());
-          return object.userId;
+          return object.userId ?? 0;
         },
         objectFromFB: (Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
 
           final object = User(
-              const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 6, ''),
-              const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 8, ''),
-              const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 10, ''),
-              const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 14, ''),
-              const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 12, ''),
-              userId:
-                  const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0));
+              firstName: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 18),
+              lastName: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 20),
+              username: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 10),
+              password: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 14),
+              phoneNumber: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 22),
+              userId: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 4),
+              uId: const fb.Int64Reader().vTableGet(buffer, rootOffset, 16, 0));
 
           return object;
         })
@@ -145,20 +169,25 @@ ModelDefinition getObjectBoxModel() {
 /// [User] entity fields to define ObjectBox queries.
 class User_ {
   /// see [User.userId]
-  static final userId = QueryIntegerProperty<User>(_entities[0].properties[0]);
-
-  /// see [User.fname]
-  static final fname = QueryStringProperty<User>(_entities[0].properties[1]);
-
-  /// see [User.lname]
-  static final lname = QueryStringProperty<User>(_entities[0].properties[2]);
+  static final userId = QueryStringProperty<User>(_entities[0].properties[0]);
 
   /// see [User.username]
-  static final username = QueryStringProperty<User>(_entities[0].properties[3]);
-
-  /// see [User.number]
-  static final number = QueryStringProperty<User>(_entities[0].properties[4]);
+  static final username = QueryStringProperty<User>(_entities[0].properties[1]);
 
   /// see [User.password]
-  static final password = QueryStringProperty<User>(_entities[0].properties[5]);
+  static final password = QueryStringProperty<User>(_entities[0].properties[2]);
+
+  /// see [User.uId]
+  static final uId = QueryIntegerProperty<User>(_entities[0].properties[3]);
+
+  /// see [User.firstName]
+  static final firstName =
+      QueryStringProperty<User>(_entities[0].properties[4]);
+
+  /// see [User.lastName]
+  static final lastName = QueryStringProperty<User>(_entities[0].properties[5]);
+
+  /// see [User.phoneNumber]
+  static final phoneNumber =
+      QueryStringProperty<User>(_entities[0].properties[6]);
 }

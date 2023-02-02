@@ -1,18 +1,33 @@
 
+import 'package:json_annotation/json_annotation.dart';
 import 'package:objectbox/objectbox.dart';
 // import 'package:roomandu/model/role.dart';
 
+part "user.g.dart";
 @Entity()
+@JsonSerializable()
 class User {
   @Id(assignable: true)
-  int userId;
-  String fname;
-  String lname;
-  String username;
-  String number;
-  String password;
+  int uId;
+
+  @Unique()
+  @Index()
+  @JsonKey(name: '_id')
+  String? userId;
+
+  String? firstName;
+  String? lastName;
+  String? username;
+  String? phoneNumber;
+  String? password;
+
 
   // final role= ToOne<Role>();
-  User(this.fname, this.lname, this.username, this.password, this.number,
-      {this.userId = 0});
+  User({this.firstName, this.lastName, this.username, this.password, this.phoneNumber,this.userId,
+      this.uId = 0});
+
+  factory User.fromJson(Map<String, dynamic> json)=>
+  _$UserFromJson(json);
+
+  Map<String, dynamic > tojson()=> _$UserToJson(this);
 }

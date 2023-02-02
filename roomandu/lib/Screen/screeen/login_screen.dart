@@ -48,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
       );
     }
   }
-
+ 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -81,19 +81,28 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(height: size.height * 0.03),
                   TextFormField(
                     controller: _usernameController,
-                    onChanged: (value) {
-                      _usernameController.text=value;
+                    decoration: const InputDecoration(
+                      labelText: "Username"
+                    ),
+                    onSaved: (value) {
+                    setState(() {
+                        _usernameController.text = value.toString();
+                    });
                     },
-                    decoration: const InputDecoration(labelText: "Username"),
                   ),
                   SizedBox(height: size.height * 0.03),
                   TextFormField(
                     controller: _passwordController,
-                    onChanged: (value) {
-                      _passwordController.text=value;
-                    },
-                    decoration: const InputDecoration(labelText: "Password"),
+                    decoration: const InputDecoration(
+                      labelText: "Password",
+                    ),
                     obscureText: true,
+                    onSaved: (value) {
+                      setState(() {
+                      _passwordController.text = value.toString();
+                        
+                      });
+                    },
                   ),
                   Container(
                     alignment: Alignment.centerRight,
@@ -147,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => RegisterScreen()))
+                                builder: (context) => const RegisterScreen()))
                       },
                       child: const Text(
                         "Don't Have an Account? Sign up",

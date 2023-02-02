@@ -5,24 +5,15 @@
   "entities": [
     {
       "id": "1:1804234227331903897",
-      "lastPropertyId": "6:944238387801549330",
+      "lastPropertyId": "10:1978691702687235557",
       "name": "User",
       "properties": [
         {
           "id": "1:7235273234236947273",
           "name": "userId",
-          "type": 6,
-          "flags": 129
-        },
-        {
-          "id": "2:7558905345642882435",
-          "name": "fname",
-          "type": 9
-        },
-        {
-          "id": "3:761170410792412423",
-          "name": "lname",
-          "type": 9
+          "type": 9,
+          "flags": 2080,
+          "indexId": "1:5144076723642793913"
         },
         {
           "id": "4:2854935816122347427",
@@ -30,13 +21,29 @@
           "type": 9
         },
         {
-          "id": "5:1548176190062946307",
-          "name": "number",
+          "id": "6:944238387801549330",
+          "name": "password",
           "type": 9
         },
         {
-          "id": "6:944238387801549330",
-          "name": "password",
+          "id": "7:2144832638566631917",
+          "name": "uId",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "8:2353302200629296688",
+          "name": "firstName",
+          "type": 9
+        },
+        {
+          "id": "9:6856895876520465934",
+          "name": "lastName",
+          "type": 9
+        },
+        {
+          "id": "10:1978691702687235557",
+          "name": "phoneNumber",
           "type": 9
         }
       ],
@@ -44,14 +51,18 @@
     }
   ],
   "lastEntityId": "1:1804234227331903897",
-  "lastIndexId": "0:0",
+  "lastIndexId": "1:5144076723642793913",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
   "retiredEntityUids": [],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    7558905345642882435,
+    761170410792412423,
+    1548176190062946307
+  ],
   "retiredRelationUids": [],
   "version": 1
 }

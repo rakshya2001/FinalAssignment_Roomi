@@ -4,6 +4,8 @@
         android:label="roomandu"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_Key"
+            android:value="AIzaSyBXgVZ7SLntLLRanB2s0X4TQrzoMNPQwnc"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

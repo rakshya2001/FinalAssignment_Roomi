@@ -1,4 +1,3 @@
-
 import 'package:path_provider/path_provider.dart';
 import 'package:roomandu/model/user.dart';
 import 'package:roomandu/objectbox.g.dart';
@@ -19,23 +18,6 @@ class ObjectBoxInstance {
     return ObjectBoxInstance(store);
   }
 
-  // void insertRoles() {
-  //   List<Role> lstRoles = getAllRole();
-  //   if (lstRoles.isEmpty) {
-  //     addRole(Role("Admin"));
-  //     addRole(Role("Customer"));
-  //     addRole(Role("Seller"));
-  //   }
-  // }
-
-  // int addRole(Role role) {
-  //   return _role.put(role);
-  // }
-
-  // List<Role> getAllRole() {
-  //   return _role.getAll();
-  // }
-
   int addUser(User user) {
     return _user.put(user);
   }
@@ -43,17 +25,12 @@ class ObjectBoxInstance {
   List<User> getAllUser() {
     return _user.getAll();
   }
+
   User? loginUser(String username, String password) {
-
     return _user
-
         .query(
-
             User_.username.equals(username) & User_.password.equals(password))
-
         .build()
-
         .findFirst();
-
   }
 }

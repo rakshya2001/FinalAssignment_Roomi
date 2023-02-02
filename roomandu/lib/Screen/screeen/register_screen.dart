@@ -8,6 +8,8 @@ import 'package:roomandu/repository/user_repo.dart';
 import 'login_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
+
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
@@ -22,16 +24,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _usernameController = TextEditingController(text: 'Rakshya');
   final _passwordController = TextEditingController(text: 'rakshya123');
 
-  // @override
-  // void initState() {
-  //   getAllRole();
-
-  //   super.initState();
-  // }
-
-  // getAllRole() async {
-  //   _lstRoles = await RoleDataSource().getAllRole();
-  // }
 
   _showMessage(int status){
     if(status > 0){
@@ -51,8 +43,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       _numberController.text,
       _passwordController.text,
     );
-    // final role = _lstRoles.firstWhere((element) => element.type==_dropDownValue);
-    // user.role.target= role;
+
 
     int status = await  UserRepositoryImp().addUser(user);
     _showMessage(status);
