@@ -16,13 +16,9 @@ class _LoginScreenState extends State<LoginScreen> {
   _signIn() async {
     try {
       var userRep = await UserRepositoryImp()
-          .signUp(_usernameController.text, _passwordController.text);
-      print(userRep.username);
-      print(userRep.password);
-      print(userRep.userId);
-      if (userRep.username == _usernameController.text &&
-          userRep.password == _passwordController.text) {
-        Navigator.pushNamed(context, "/dashboardScreen");
+          .login(_usernameController.text, _passwordController.text);
+     if(userRep) {
+        Navigator.pushNamed(context, "/homepageScreen");
 
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(

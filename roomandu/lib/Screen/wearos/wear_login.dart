@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 // import 'package:roomandu/Screen/screeen/dashboard_screen.dart';
-import 'package:roomandu/Screen/wearos/wear_dashboard.dart';
-import 'package:roomandu/model/user.dart';
 import 'package:roomandu/repository/user_repo.dart';
 import 'package:wear/wear.dart';
 
@@ -19,16 +17,12 @@ class _WearLoginScreenState extends State<WearLoginScreen> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
-   _signIn() async {
+  _signIn() async {
     try {
       var userRep = await UserRepositoryImp()
-          .signUp(_usernameController.text, _passwordController.text);
-      print(userRep.username);
-      print(userRep.password);
-      print(userRep.userId);
-      if (userRep.username == _usernameController.text &&
-          userRep.password == _passwordController.text) {
-        Navigator.pushNamed(context, "/weardashboardScreen");
+          .login(_usernameController.text, _passwordController.text);
+     if(userRep) {
+        Navigator.pushNamed(context, "/dashboardScreen");
 
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -129,19 +123,11 @@ class _WearLoginScreenState extends State<WearLoginScreen> {
                             horizontal: 5, vertical: 3),
                         child: ElevatedButton(
                           onPressed: () async {
-                            if (formkey.currentState!.validate()) {}
-                            User? user = await UserRepositoryImp().signUp(
-                                _usernameController.text,
-                                _passwordController.text);
-                            if (user == null) {
-                              print("Invalid Username or Password");
-                              return;
+                            if (formkey.currentState!.validate()) {
+                              _signIn();
                             }
-                            Navigator.of(context).pushAndRemoveUntil(
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const WearDashboardScreen()),
-                                (route) => false);
+                           
+                            
                           },
                           // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
                           // textColor: Colors.white,

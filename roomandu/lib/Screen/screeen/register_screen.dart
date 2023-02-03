@@ -18,9 +18,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
   // late List<Role> _lstRoles = [];
   late final  String _dropDownValue= "";
   final _key = GlobalKey<FormState>();
-  final _fnameController = TextEditingController(text: 'Rakshya');
-  final _lnameController = TextEditingController(text: 'Bhatta');
-  final _numberController = TextEditingController(text: '9848425833');
+  final _firstNameController = TextEditingController(text: 'Rakshya');
+  final _lastNameController = TextEditingController(text: 'Bhatta');
+  final _phoneNumberController = TextEditingController(text: '9848425833');
   final _usernameController = TextEditingController(text: 'Rakshya');
   final _passwordController = TextEditingController(text: 'rakshya123');
 
@@ -37,11 +37,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   _saveUser() async{
     User user = User(
-      _fnameController.text,
-      _lnameController.text,
-      _usernameController.text,
-      _numberController.text,
-      _passwordController.text,
+      firstName:_firstNameController.text,
+     lastName: _lastNameController.text,
+      username:_usernameController.text,
+     phoneNumber: _phoneNumberController.text,
+      password:_passwordController.text,
     );
 
 
@@ -78,7 +78,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               alignment: Alignment.center,
               margin: const EdgeInsets.symmetric(horizontal: 40),
               child: const TextField(
-                decoration: InputDecoration(labelText: "Name"),
+                decoration: InputDecoration(labelText: " Full Name"),
               ),
             ),
             SizedBox(height: size.height * 0.03),
@@ -89,42 +89,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 decoration: InputDecoration(labelText: "Mobile Number"),
               ),
             ),
-            // FutureBuilder(
-            //           future: RoleDataSource().getAllRole(),
-            //           builder: (context, snapshot) {
-            //             if (snapshot.hasData) {
-            //               return DropdownButtonFormField(
-            //                 validator: (value) {
-            //                   if (value == null) {
-            //                     return 'Please select Role';
-            //                   }
-            //                   return null;
-            //                 },
-            //                 isExpanded: true,
-            //                 decoration: const InputDecoration(
-            //                   labelText: 'Select Role',
-            //                 ),
-            //                 items: snapshot.data!
-            //                     .map((role) => DropdownMenuItem(
-                                
-            //                           value: role.type,
-            //                           child: Text(role.type),
-            //                         ))
-            //                     .toList(),
-            //                 onChanged: (value) {
-            //                   if(value == "Admin"){
-            //                   _dropDownValue= "";
-            //                   }
-            //                   _dropDownValue = value!;
-            //                 },
-            //               );
-            //             } else {
-            //               return const Center(
-            //                 child: CircularProgressIndicator(),
-            //               );
-            //             }
-            //           },
-            //         ),
             SizedBox(height: size.height * 0.03),
             Container(
               alignment: Alignment.center,
@@ -150,9 +114,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 onPressed: () {
                   _saveUser();
                 },
-                // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
-                // textColor: Colors.white,
-                // padding: const EdgeInsets.all(0),
                 child: Container(
                   alignment: Alignment.center,
                   height: 50.0,

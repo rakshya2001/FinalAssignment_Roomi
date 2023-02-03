@@ -107,9 +107,9 @@ ModelDefinition getObjectBoxModel() {
         model: _entities[0],
         toOneRelations: (User object) => [],
         toManyRelations: (User object) => {},
-        getId: (User object) => object.userId,
+        getId: (User object) => object.uId,
         setId: (User object, int id) {
-          object.userId = id;
+          object.uId = id;
         },
         objectToFB: (User object, fb.Builder fbb) {
           final userIdOffset =
@@ -138,7 +138,7 @@ ModelDefinition getObjectBoxModel() {
           fbb.addOffset(8, lastNameOffset);
           fbb.addOffset(9, phoneNumberOffset);
           fbb.finish(fbb.endTable());
-          return object.userId ?? 0;
+          return object.uId;
         },
         objectFromFB: (Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);

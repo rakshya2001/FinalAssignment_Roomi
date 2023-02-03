@@ -18,8 +18,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/':(context) => const LoginScreen(),
         '/registerScreen':(context) =>   RegisterScreen(),
-        '/dashboardScreen':(context) => const DashboardScreen(),
-        '/homepageScreen':(context) => const Homepage(),
+        '/homepageScreen':(context) => const HomepageScreen(),
         '/wearlogin':(context) => const WearLoginScreen(),
         '/weardashboardScreen':(context) => const WearDashboardScreen()
       },
