@@ -1,58 +1,57 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
-import 'package:roomandu/Screen/screeen/register_screen.dart';
-import 'package:roomandu/app/constants.dart';
-import 'package:roomandu/repository/user_repo.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+import '../screeen/register_screen.dart';
 
-  static const String route = "loginScreen";
-
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
+void main() {
+  AwesomeNotifications().initialize('resource://drawable/launcher', [
+    NotificationChannel(
+        channelKey: 'important_channel_group',
+        channelName: 'important_channel',
+        channelDescription: 'This is Important Notification',
+        defaultColor: Colors.blueAccent,
+        ledColor: Colors.white,
+        channelShowBadge: true,
+        importance: NotificationImportance.Max)
+  ]);
+  runApp(const MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: MyApp(),
+  ));
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  final _key = GlobalKey<FormState>();
-  final _usernameController = TextEditingController(text: 'Rakshya');
-  final _passwordController = TextEditingController(text: 'rakshya123');
-  _signIn() async {
-    try {
-      var userRep = await UserRepositoryImp()
-          .login(_usernameController.text, _passwordController.text);
-          print(userRep);
-     if(userRep) {
-        Navigator.pushNamed( context, "/homepage");
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
 
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text(
-              "Login Successfully",
-            ),
-            backgroundColor: Colors.green,
-            behavior: SnackBarBehavior.floating,
-            duration: Duration(seconds: 4),
-          ),
-        );
-      }
-    else{
-      const SnackBar(
-            content: Text(
-              "Login failed",
-            ),
-            backgroundColor: Colors.red,
-            behavior: SnackBarBehavior.floating,
-            duration: Duration(seconds: 4),
-          );
-      
-    }
-  
-  }  catch (e) {
-    
-    }
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  _checkNotificationEnabled() {
+    AwesomeNotifications().isNotificationAllowed().then(
+      (isAllowed) {
+        if (!isAllowed) {
+          AwesomeNotifications().requestPermissionToSendNotifications();
+        }
+      },
+    );
   }
- 
+  
+  @override
+  void initState() {
+    // _checkNotificationEnabled();
+    super.initState();
+  }
+
+  final _key= GlobalKey<FormState>();
+  final _usernameController = TextEditingController();
+  final _passwordController= TextEditingController();
+
+  _signIn(){
+
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -126,15 +125,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: ElevatedButton(
                       onPressed: () {
                         if(_key.currentState!.validate()) {
-                          AwesomeNotifications().createNotification(
-                            content: NotificationContent(
-                            channelKey: 'basic_channel',
-                            id:10,
-                            title: 'Login',
-                            body: 
-                                'Login Successful as ${_usernameController.text}' 
-                            )
-                          );
                           _signIn();
                         }
                       },

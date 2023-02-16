@@ -2,7 +2,7 @@ class Constant {
   static const String baseURL = "http://10.0.2.2:3000/";
 
   // For testing
-  //static const String baseURL = "http://localhost:3000/api/v1/";
+  // static const String baseURL = "http://localhost:3000/";
 
   // ----------------Student URL----------------
   static const String userLoginURL = "user/login";

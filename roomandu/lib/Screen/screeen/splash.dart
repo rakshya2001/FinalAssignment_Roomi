@@ -3,18 +3,20 @@ import 'package:flutter/material.dart';
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
+  static const String route = "splashScreen";
+
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-Future.delayed(const Duration(seconds: 7),(){
-      Navigator.pushReplacementNamed(context,'/loginscreen');
-    });
-    super.initState();    super.initState();
-  }
+//   @override
+//   void initState() {
+// Future.delayed(const Duration(seconds: 7),(){
+//       Navigator.pushReplacementNamed(context,'/loginscreen');
+//     });
+//     super.initState();    super.initState();
+//   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:roomandu/Screen/screeen/dashboard_screen.dart';
-import 'package:roomandu/Screen/screeen/homepage.dart';
-import 'package:roomandu/Screen/screeen/login_screen.dart';
-import 'package:roomandu/Screen/screeen/register_screen.dart';
-import 'package:roomandu/Screen/wearos/wear_dashboard.dart';
-import 'package:roomandu/Screen/wearos/wear_login.dart';
+import 'package:roomandu/app/routes.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -12,17 +7,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title:'User Register',
       debugShowCheckedModeBanner: false,
-      initialRoute:'/',
-      routes: {
-        '/':(context) => const LoginScreen(),
-        '/registerScreen':(context) =>   RegisterScreen(),
-        '/homepageScreen':(context) => const HomepageScreen(),
-        '/wearlogin':(context) => const WearLoginScreen(),
-        '/weardashboardScreen':(context) => const WearDashboardScreen()
-      },
-
+      initialRoute:'/wearscreen',
+      routes: getAppRoutes,
     );
   }
 }

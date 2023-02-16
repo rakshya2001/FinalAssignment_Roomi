@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wear/wear.dart';
 
 class WearDashboardScreen extends StatefulWidget {
   const WearDashboardScreen({super.key});
@@ -11,31 +10,43 @@ class WearDashboardScreen extends StatefulWidget {
 }
 
 class _WearDashboardScreenState extends State<WearDashboardScreen> {
-  @override
+   int _selectIndex = 0;
+   @override
   Widget build(BuildContext context) {
-    return AmbientMode(
-      builder: (
-        context,
-        mode,
-        child,
-      ) {
-        return Scaffold(
-          appBar: AppBar(
-            toolbarHeight: MediaQuery.of(context).size.height * .2,
-            title: const Text('Dashboard'),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Dashboard"),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Column(
-                children: const [
-                  Text('Dashboard'),
-                ],
-              ),
-            ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shop),
+            label: 'Cart',
           ),
-        );
-      },
+          BottomNavigationBarItem(
+            icon: Icon(Icons.category),
+            label: 'Category',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.man),
+            label: 'Profile',
+          ),
+        ],
+        backgroundColor: Colors.green,
+        selectedItemColor: Colors.pink,
+        unselectedItemColor: Colors.black,
+        currentIndex: _selectIndex,
+        onTap: (index) {
+          setState(() {
+            _selectIndex = index;
+          });
+        },
+      ),
+      
     );
   }
 }

@@ -1,165 +1,89 @@
 import 'package:flutter/material.dart';
-// import 'package:roomandu/Screen/screeen/dashboard_screen.dart';
 import 'package:roomandu/repository/user_repo.dart';
+// import 'package:roomandu/Screen/screeen/dashboard_screen.dart';
+
 import 'package:wear/wear.dart';
 
-class WearLoginScreen extends StatefulWidget {
-  const WearLoginScreen({super.key});
+class LoginScreenWatch extends StatefulWidget {
+  const LoginScreenWatch({super.key});
 
   @override
-  State<WearLoginScreen> createState() => _WearLoginScreenState();
+  State<LoginScreenWatch> createState() => _LoginScreenWatchState();
 }
 
-class _WearLoginScreenState extends State<WearLoginScreen> {
-  final formkey = GlobalKey<FormState>();
-  final gap = const SizedBox(height: 20);
+class _LoginScreenWatchState extends State<LoginScreenWatch> {
+  final usernamecontroller = TextEditingController(text: "Rakshya");
+  final passwordcontoller = TextEditingController(text: "rakshya123");
+  final _key = GlobalKey<FormState>();
 
-  final _usernameController = TextEditingController();
-  final _passwordController = TextEditingController();
-
-  _signIn() async {
-    try {
-      var userRep = await UserRepositoryImp()
-          .login(_usernameController.text, _passwordController.text);
-     if(userRep) {
-        Navigator.pushNamed(context, "/dashboardScreen");
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text(
-              "Login Successfully",
-            ),
-            backgroundColor: Colors.green,
-            behavior: SnackBarBehavior.floating,
-            duration: Duration(seconds: 4),
-          ),
-        );
-      }
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(
-            "Login Failed",
-          ),
-          backgroundColor: Colors.redAccent,
-          behavior: SnackBarBehavior.floating,
-          duration: Duration(seconds: 4),
-        ),
-      );
-    }
-  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return WatchShape(
-        builder: (BuildContext context, WearShape, Widget? child) {
+    _goToAnotherPage() {
+      Navigator.pushNamed(context, "/wearosscreen");
+    }
+
+    _loginuser() async {
+      var status = await UserRepositoryImp()
+          .login(usernamecontroller.text, passwordcontoller.text);
+      if (status == true) {
+        _goToAnotherPage();
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("User Login Failed"),
+          ),
+        );
+      }
+    }
+
+    return WatchShape(builder: (BuildContext context, shape, child) {
       return AmbientMode(
-        builder: (context, mode, child) {
-          return SafeArea(
-            child: Scaffold(
-              body: Form(
-                key: formkey,
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        padding: const EdgeInsets.symmetric(horizontal: 5),
-                        child: const Text(
-                          "LOGIN",
-                          style: TextStyle(
-                              fontFamily: "Montserrant Bold",
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF2661FA),
-                              fontSize: 20),
-                          textAlign: TextAlign.left,
-                        ),
-                      ),
-                      gap,
-                      Container(
-                        alignment: Alignment.center,
-                        margin: const EdgeInsets.symmetric(horizontal: 5),
-                        child: TextFormField(
-                          style: const TextStyle(
-                            fontFamily: "Montserrant",
-                          ),
-                          decoration: const InputDecoration(
-                            labelText: "Username",
-                          ),
-                          controller: _usernameController,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter username';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      gap,
-                      Container(
-                        alignment: Alignment.center,
-                        margin: const EdgeInsets.symmetric(horizontal: 5),
-                        child: TextFormField(
-                          style: const TextStyle(
-                            fontFamily: "Montserrant",
-                          ),
-                          decoration:
-                              const InputDecoration(labelText: "Password"),
-                          obscureText: true,
-                          controller: _passwordController,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter password';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      gap,
-                      Container(
-                        alignment: Alignment.centerRight,
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 5, vertical: 3),
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            if (formkey.currentState!.validate()) {
-                              _signIn();
-                            }
-                           
-                            
-                          },
-                          // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
-                          // textColor: Colors.white,
-                          // padding: const EdgeInsets.all(0),
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: 50.0,
-                            width: size.width * 0.5,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(80.0),
-                                gradient: const LinearGradient(colors: [
-                                  Color.fromARGB(255, 255, 136, 34),
-                                  Color.fromARGB(255, 255, 177, 41)
-                                ])),
-                            padding: const EdgeInsets.all(0),
-                            child: const Text(
-                              "LOGIN",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  letterSpacing: 3,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+        builder: (context, mode, child) => Scaffold(
+            body: SingleChildScrollView(
+          child: Form(
+            key: _key,
+            child: Column(
+              children: [
+                 SizedBox(height: size.height * 0.03),
+                  TextFormField(
+                    controller: usernamecontroller,
+                    decoration: const InputDecoration(
+                      labelText: "Username"
+                    ),
+                    onSaved: (value) {
+                    setState(() {
+                        usernamecontroller.text = value.toString();
+                    });
+                    },
                   ),
-                ),
-              ),
+                SizedBox(height: size.height * 0.03),
+                  TextFormField(
+                    controller: passwordcontoller,
+                    decoration: const InputDecoration(
+                      labelText: "Password",
+                    ),
+                    obscureText: true,
+                    onSaved: (value) {
+                      setState(() {
+                      passwordcontoller.text = value.toString();
+                        
+                      });
+                    },
+                  ),
+
+                
+                ElevatedButton(
+                    onPressed: () {
+                      if (_key.currentState!.validate()) {
+                        _loginuser();
+                      }
+                    },
+                    child: const Text("login"))
+              ],
             ),
-          );
-        },
+          ),
+        )),
       );
     });
   }
