@@ -27,12 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemBuilder: (context, index) {
                         return GestureDetector(
                             onTap: () {
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) => ProductDetails(
-                              //               product: snapshot.data![index],
-                              //             )));
+                              Navigator.pushNamed(context, "/productdetails",arguments: snapshot.data![index].productId);
                             },
                             child: Card(
                               child: Column(

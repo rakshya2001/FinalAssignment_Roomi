@@ -22,5 +22,20 @@ class ProductRemoteDataSource{
       return null;
     }
   }
+
+  Future<List<Product>?> getproductbyid(String id) async{
+    try{
+      Response response = await _httpServices.get(Constant.productURL+id);
+      if(response.statusCode == 200){
+        ProductResponse productResponse = ProductResponse.fromJson(response.data);
+        return productResponse.data;
+      }else{
+        return null;
+      }
+    }catch(e){
+      return null;
+    }
+  }
+
   
 }

@@ -1,11 +1,13 @@
 
+import 'dart:io';
+
 import 'package:roomandu/data_source/local_data_source/user_data_source.dart';
 import 'package:roomandu/data_source/remote_data_source/user_remote_data_source.dart';
 import 'package:roomandu/model/user.dart';
 
 abstract class UserRepository {
   Future<List<User>> getAllUser();
-  Future<int> addUser(User user);
+  Future<int> addUser(File? file ,User user);
   Future<bool> login(String username, String password);
 
 
@@ -13,8 +15,8 @@ abstract class UserRepository {
 
 class UserRepositoryImp extends UserRepository {
   @override
-  Future<int> addUser(User user) {
-    return UserRemoteDataSource().registerUser(user);
+  Future<int> addUser(File? file,User user) {
+    return UserRemoteDataSource().registerUser(file ,user);
   }
 
   @override

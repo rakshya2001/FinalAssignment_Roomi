@@ -12,12 +12,13 @@ class Constant {
   static const String userRegisterURL = "user/register";
 
   // static const String userURL = "user";
-  static const String userImageURL="http://10.0.2.2.:3000";
+  static const String userImageURL = "http://10.0.2.2:3000/uploads/";
 
   // -----------------Product URL----------------
-  static const String productURL = "product";
+  static const String productURL = "product/";
 
-
+  //---------------category URL------------------
+  static const String categoryURL = "category/";
 
   // For storing token or you can store token in shared preferences
   static String token = "";

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:objectbox/objectbox.dart';
 
@@ -15,12 +16,15 @@ class Product {
   String? room_description;
   String? image;
 
+
+
   Product(
       {this.id = 0,
       this.productId,
       this.room_price,
       this.room_location,
       this.room_description,
+      
       this.image});
 
   factory Product.fromJson(Map<String, dynamic> json) =>

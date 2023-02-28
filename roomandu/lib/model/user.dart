@@ -20,10 +20,12 @@ class User {
   String? username;
   String? phoneNumber;
   String? password;
+  String? email;
 
 
   // final role= ToOne<Role>();
   User({this.firstName, this.lastName, this.username, this.password, this.phoneNumber,this.userId,
+  this.email,
       this.uId = 0});
 
   factory User.fromJson(Map<String, dynamic> json)=>

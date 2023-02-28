@@ -14,6 +14,7 @@ import 'package:objectbox/internal.dart'; // generated code can access "internal
 import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
+import 'model/category.dart';
 import 'model/product.dart';
 import 'model/user.dart';
 
@@ -23,7 +24,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(1, 1804234227331903897),
       name: 'User',
-      lastPropertyId: const IdUid(10, 1978691702687235557),
+      lastPropertyId: const IdUid(11, 4544174851941938934),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -61,6 +62,11 @@ final _entities = <ModelEntity>[
             id: const IdUid(10, 1978691702687235557),
             name: 'phoneNumber',
             type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(11, 4544174851941938934),
+            name: 'email',
+            type: 9,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -68,7 +74,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(2, 803300075456594274),
       name: 'Product',
-      lastPropertyId: const IdUid(7, 2457793205736042357),
+      lastPropertyId: const IdUid(8, 6894476993731507213),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -104,6 +110,31 @@ final _entities = <ModelEntity>[
             flags: 0)
       ],
       relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(3, 6540453669537444649),
+      name: 'Category',
+      lastPropertyId: const IdUid(5, 6784988289158001829),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 2851417343352852447),
+            name: 'cId',
+            type: 6,
+            flags: 129),
+        ModelProperty(
+            id: const IdUid(2, 2104785640931135382),
+            name: 'categoryId',
+            type: 9,
+            flags: 2080,
+            indexId: const IdUid(3, 5532225831525525996)),
+        ModelProperty(
+            id: const IdUid(5, 6784988289158001829),
+            name: 'category_name',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
 ];
 
@@ -127,19 +158,22 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(2, 803300075456594274),
-      lastIndexId: const IdUid(2, 8136508235042784512),
-      lastRelationId: const IdUid(0, 0),
+      lastEntityId: const IdUid(3, 6540453669537444649),
+      lastIndexId: const IdUid(4, 2676902101768009065),
+      lastRelationId: const IdUid(2, 5238031804794642045),
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [],
-      retiredIndexUids: const [],
+      retiredIndexUids: const [2676902101768009065],
       retiredPropertyUids: const [
         7558905345642882435,
         761170410792412423,
         1548176190062946307,
-        6001598375227869705
+        6001598375227869705,
+        3849036958838273404,
+        6511132067267747871,
+        6894476993731507213
       ],
-      retiredRelationUids: const [],
+      retiredRelationUids: const [4802300515139935443, 5238031804794642045],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
       version: 1);
@@ -171,7 +205,9 @@ ModelDefinition getObjectBoxModel() {
           final phoneNumberOffset = object.phoneNumber == null
               ? null
               : fbb.writeString(object.phoneNumber!);
-          fbb.startTable(11);
+          final emailOffset =
+              object.email == null ? null : fbb.writeString(object.email!);
+          fbb.startTable(12);
           fbb.addOffset(0, userIdOffset);
           fbb.addOffset(3, usernameOffset);
           fbb.addOffset(5, passwordOffset);
@@ -179,6 +215,7 @@ ModelDefinition getObjectBoxModel() {
           fbb.addOffset(7, firstNameOffset);
           fbb.addOffset(8, lastNameOffset);
           fbb.addOffset(9, phoneNumberOffset);
+          fbb.addOffset(10, emailOffset);
           fbb.finish(fbb.endTable());
           return object.uId;
         },
@@ -199,6 +236,8 @@ ModelDefinition getObjectBoxModel() {
                   .vTableGetNullable(buffer, rootOffset, 22),
               userId: const fb.StringReader(asciiOptimization: true)
                   .vTableGetNullable(buffer, rootOffset, 4),
+              email: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 24),
               uId: const fb.Int64Reader().vTableGet(buffer, rootOffset, 16, 0));
 
           return object;
@@ -226,7 +265,7 @@ ModelDefinition getObjectBoxModel() {
           final room_descriptionOffset = object.room_description == null
               ? null
               : fbb.writeString(object.room_description!);
-          fbb.startTable(8);
+          fbb.startTable(9);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, productIdOffset);
           fbb.addOffset(2, room_priceOffset);
@@ -252,6 +291,41 @@ ModelDefinition getObjectBoxModel() {
                   .vTableGetNullable(buffer, rootOffset, 16),
               image: const fb.StringReader(asciiOptimization: true)
                   .vTableGetNullable(buffer, rootOffset, 14));
+
+          return object;
+        }),
+    Category: EntityDefinition<Category>(
+        model: _entities[2],
+        toOneRelations: (Category object) => [],
+        toManyRelations: (Category object) => {},
+        getId: (Category object) => object.cId,
+        setId: (Category object, int id) {
+          object.cId = id;
+        },
+        objectToFB: (Category object, fb.Builder fbb) {
+          final categoryIdOffset = object.categoryId == null
+              ? null
+              : fbb.writeString(object.categoryId!);
+          final category_nameOffset = object.category_name == null
+              ? null
+              : fbb.writeString(object.category_name!);
+          fbb.startTable(6);
+          fbb.addInt64(0, object.cId);
+          fbb.addOffset(1, categoryIdOffset);
+          fbb.addOffset(4, category_nameOffset);
+          fbb.finish(fbb.endTable());
+          return object.cId;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+
+          final object = Category(
+              categoryId: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 6),
+              category_name: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 12),
+              cId: const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0));
 
           return object;
         })
@@ -284,6 +358,9 @@ class User_ {
   /// see [User.phoneNumber]
   static final phoneNumber =
       QueryStringProperty<User>(_entities[0].properties[6]);
+
+  /// see [User.email]
+  static final email = QueryStringProperty<User>(_entities[0].properties[7]);
 }
 
 /// [Product] entity fields to define ObjectBox queries.
@@ -309,4 +386,18 @@ class Product_ {
   /// see [Product.room_description]
   static final room_description =
       QueryStringProperty<Product>(_entities[1].properties[5]);
+}
+
+/// [Category] entity fields to define ObjectBox queries.
+class Category_ {
+  /// see [Category.cId]
+  static final cId = QueryIntegerProperty<Category>(_entities[2].properties[0]);
+
+  /// see [Category.categoryId]
+  static final categoryId =
+      QueryStringProperty<Category>(_entities[2].properties[1]);
+
+  /// see [Category.category_name]
+  static final category_name =
+      QueryStringProperty<Category>(_entities[2].properties[2]);
 }
