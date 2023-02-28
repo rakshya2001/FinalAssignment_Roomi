@@ -14,6 +14,7 @@ import 'package:objectbox/internal.dart'; // generated code can access "internal
 import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
+import 'model/product.dart';
 import 'model/user.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
@@ -63,6 +64,46 @@ final _entities = <ModelEntity>[
             flags: 0)
       ],
       relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(2, 803300075456594274),
+      name: 'Product',
+      lastPropertyId: const IdUid(7, 2457793205736042357),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 6920020617460914593),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 8391578167469861979),
+            name: 'productId',
+            type: 9,
+            flags: 2080,
+            indexId: const IdUid(2, 8136508235042784512)),
+        ModelProperty(
+            id: const IdUid(3, 7687622304847284293),
+            name: 'room_price',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 6852574431639635271),
+            name: 'room_location',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(6, 6420164066604175231),
+            name: 'image',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(7, 2457793205736042357),
+            name: 'room_description',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
 ];
 
@@ -86,8 +127,8 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(1, 1804234227331903897),
-      lastIndexId: const IdUid(1, 5144076723642793913),
+      lastEntityId: const IdUid(2, 803300075456594274),
+      lastIndexId: const IdUid(2, 8136508235042784512),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [],
@@ -95,7 +136,8 @@ ModelDefinition getObjectBoxModel() {
       retiredPropertyUids: const [
         7558905345642882435,
         761170410792412423,
-        1548176190062946307
+        1548176190062946307,
+        6001598375227869705
       ],
       retiredRelationUids: const [],
       modelVersion: 5,
@@ -160,6 +202,58 @@ ModelDefinition getObjectBoxModel() {
               uId: const fb.Int64Reader().vTableGet(buffer, rootOffset, 16, 0));
 
           return object;
+        }),
+    Product: EntityDefinition<Product>(
+        model: _entities[1],
+        toOneRelations: (Product object) => [],
+        toManyRelations: (Product object) => {},
+        getId: (Product object) => object.id,
+        setId: (Product object, int id) {
+          object.id = id;
+        },
+        objectToFB: (Product object, fb.Builder fbb) {
+          final productIdOffset = object.productId == null
+              ? null
+              : fbb.writeString(object.productId!);
+          final room_priceOffset = object.room_price == null
+              ? null
+              : fbb.writeString(object.room_price!);
+          final room_locationOffset = object.room_location == null
+              ? null
+              : fbb.writeString(object.room_location!);
+          final imageOffset =
+              object.image == null ? null : fbb.writeString(object.image!);
+          final room_descriptionOffset = object.room_description == null
+              ? null
+              : fbb.writeString(object.room_description!);
+          fbb.startTable(8);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, productIdOffset);
+          fbb.addOffset(2, room_priceOffset);
+          fbb.addOffset(3, room_locationOffset);
+          fbb.addOffset(5, imageOffset);
+          fbb.addOffset(6, room_descriptionOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+
+          final object = Product(
+              id: const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0),
+              productId: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 6),
+              room_price: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 8),
+              room_location: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 10),
+              room_description: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 16),
+              image: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 14));
+
+          return object;
         })
   };
 
@@ -190,4 +284,29 @@ class User_ {
   /// see [User.phoneNumber]
   static final phoneNumber =
       QueryStringProperty<User>(_entities[0].properties[6]);
+}
+
+/// [Product] entity fields to define ObjectBox queries.
+class Product_ {
+  /// see [Product.id]
+  static final id = QueryIntegerProperty<Product>(_entities[1].properties[0]);
+
+  /// see [Product.productId]
+  static final productId =
+      QueryStringProperty<Product>(_entities[1].properties[1]);
+
+  /// see [Product.room_price]
+  static final room_price =
+      QueryStringProperty<Product>(_entities[1].properties[2]);
+
+  /// see [Product.room_location]
+  static final room_location =
+      QueryStringProperty<Product>(_entities[1].properties[3]);
+
+  /// see [Product.image]
+  static final image = QueryStringProperty<Product>(_entities[1].properties[4]);
+
+  /// see [Product.room_description]
+  static final room_description =
+      QueryStringProperty<Product>(_entities[1].properties[5]);
 }

@@ -48,10 +48,51 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "2:803300075456594274",
+      "lastPropertyId": "7:2457793205736042357",
+      "name": "Product",
+      "properties": [
+        {
+          "id": "1:6920020617460914593",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8391578167469861979",
+          "name": "productId",
+          "type": 9,
+          "flags": 2080,
+          "indexId": "2:8136508235042784512"
+        },
+        {
+          "id": "3:7687622304847284293",
+          "name": "room_price",
+          "type": 9
+        },
+        {
+          "id": "4:6852574431639635271",
+          "name": "room_location",
+          "type": 9
+        },
+        {
+          "id": "6:6420164066604175231",
+          "name": "image",
+          "type": 9
+        },
+        {
+          "id": "7:2457793205736042357",
+          "name": "room_description",
+          "type": 9
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "1:1804234227331903897",
-  "lastIndexId": "1:5144076723642793913",
+  "lastEntityId": "2:803300075456594274",
+  "lastIndexId": "2:8136508235042784512",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
@@ -61,7 +102,8 @@
   "retiredPropertyUids": [
     7558905345642882435,
     761170410792412423,
-    1548176190062946307
+    1548176190062946307,
+    6001598375227869705
   ],
   "retiredRelationUids": [],
   "version": 1
