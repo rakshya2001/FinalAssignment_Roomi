@@ -1,7 +1,6 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:roomandu/Screen/screeen/register_screen.dart';
-import 'package:roomandu/app/constants.dart';
 import 'package:roomandu/repository/user_repo.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -15,15 +14,15 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _key = GlobalKey<FormState>();
-  final _usernameController = TextEditingController(text: 'Rakshya');
-  final _passwordController = TextEditingController(text: 'rakshya123');
+  final _usernameController = TextEditingController(text: 'sanjog');
+  final _passwordController = TextEditingController(text: '123456478');
   _signIn() async {
     try {
       var userRep = await UserRepositoryImp()
           .login(_usernameController.text, _passwordController.text);
-          print(userRep);
-     if(userRep) {
-        Navigator.pushNamed( context, "/homepage");
+      print(userRep);
+      if (userRep) {
+        Navigator.pushNamed(context, "/homepage");
 
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -35,24 +34,19 @@ class _LoginScreenState extends State<LoginScreen> {
             duration: Duration(seconds: 4),
           ),
         );
+      } else {
+        const SnackBar(
+          content: Text(
+            "Login failed",
+          ),
+          backgroundColor: Colors.red,
+          behavior: SnackBarBehavior.floating,
+          duration: Duration(seconds: 4),
+        );
       }
-    else{
-      const SnackBar(
-            content: Text(
-              "Login failed",
-            ),
-            backgroundColor: Colors.red,
-            behavior: SnackBarBehavior.floating,
-            duration: Duration(seconds: 4),
-          );
-      
-    }
-  
-  }  catch (e) {
-    
-    }
+    } catch (e) {}
   }
- 
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -85,13 +79,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(height: size.height * 0.03),
                   TextFormField(
                     controller: _usernameController,
-                    decoration: const InputDecoration(
-                      labelText: "Username"
-                    ),
+                    decoration: const InputDecoration(labelText: "Username"),
                     onSaved: (value) {
-                    setState(() {
+                      setState(() {
                         _usernameController.text = value.toString();
-                    });
+                      });
                     },
                   ),
                   SizedBox(height: size.height * 0.03),
@@ -103,38 +95,36 @@ class _LoginScreenState extends State<LoginScreen> {
                     obscureText: true,
                     onSaved: (value) {
                       setState(() {
-                      _passwordController.text = value.toString();
-                        
+                        _passwordController.text = value.toString();
                       });
                     },
                   ),
                   Container(
                     alignment: Alignment.centerRight,
-                    margin:
-                        const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 40, vertical: 10),
                     child: const Text(
                       "Forgot your password?",
                       style: TextStyle(
-                          fontSize: 12, color: Color.fromARGB(255, 255, 136, 34)),
+                          fontSize: 12,
+                          color: Color.fromARGB(255, 255, 136, 34)),
                     ),
                   ),
                   SizedBox(height: size.height * 0.05),
                   Container(
                     alignment: Alignment.centerRight,
-                    margin:
-                        const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 40, vertical: 10),
                     child: ElevatedButton(
                       onPressed: () {
-                        if(_key.currentState!.validate()) {
+                        if (_key.currentState!.validate()) {
                           AwesomeNotifications().createNotification(
-                            content: NotificationContent(
-                            channelKey: 'basic_channel',
-                            id:10,
-                            title: 'Login',
-                            body: 
-                                'Login Successful as ${_usernameController.text}' 
-                            )
-                          );
+                              content: NotificationContent(
+                                  channelKey: 'basic_channel',
+                                  id: 10,
+                                  title: 'Login',
+                                  body:
+                                      'Login Successful as ${_usernameController.text}'));
                           _signIn();
                         }
                       },
@@ -162,8 +152,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   Container(
                     alignment: Alignment.centerRight,
-                    margin:
-                        const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 40, vertical: 10),
                     child: GestureDetector(
                       onTap: () => {
                         Navigator.push(

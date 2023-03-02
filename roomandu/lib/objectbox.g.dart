@@ -24,7 +24,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(1, 1804234227331903897),
       name: 'User',
-      lastPropertyId: const IdUid(11, 4544174851941938934),
+      lastPropertyId: const IdUid(13, 2663093882436612960),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -66,6 +66,16 @@ final _entities = <ModelEntity>[
         ModelProperty(
             id: const IdUid(11, 4544174851941938934),
             name: 'email',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(12, 5770919961138751647),
+            name: 'role',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(13, 2663093882436612960),
+            name: 'profile',
             type: 9,
             flags: 0)
       ],
@@ -207,7 +217,11 @@ ModelDefinition getObjectBoxModel() {
               : fbb.writeString(object.phoneNumber!);
           final emailOffset =
               object.email == null ? null : fbb.writeString(object.email!);
-          fbb.startTable(12);
+          final roleOffset =
+              object.role == null ? null : fbb.writeString(object.role!);
+          final profileOffset =
+              object.profile == null ? null : fbb.writeString(object.profile!);
+          fbb.startTable(14);
           fbb.addOffset(0, userIdOffset);
           fbb.addOffset(3, usernameOffset);
           fbb.addOffset(5, passwordOffset);
@@ -216,6 +230,8 @@ ModelDefinition getObjectBoxModel() {
           fbb.addOffset(8, lastNameOffset);
           fbb.addOffset(9, phoneNumberOffset);
           fbb.addOffset(10, emailOffset);
+          fbb.addOffset(11, roleOffset);
+          fbb.addOffset(12, profileOffset);
           fbb.finish(fbb.endTable());
           return object.uId;
         },
@@ -238,6 +254,9 @@ ModelDefinition getObjectBoxModel() {
                   .vTableGetNullable(buffer, rootOffset, 4),
               email: const fb.StringReader(asciiOptimization: true)
                   .vTableGetNullable(buffer, rootOffset, 24),
+              role:
+                  const fb.StringReader(asciiOptimization: true).vTableGetNullable(buffer, rootOffset, 26),
+              profile: const fb.StringReader(asciiOptimization: true).vTableGetNullable(buffer, rootOffset, 28),
               uId: const fb.Int64Reader().vTableGet(buffer, rootOffset, 16, 0));
 
           return object;
@@ -361,6 +380,12 @@ class User_ {
 
   /// see [User.email]
   static final email = QueryStringProperty<User>(_entities[0].properties[7]);
+
+  /// see [User.role]
+  static final role = QueryStringProperty<User>(_entities[0].properties[8]);
+
+  /// see [User.profile]
+  static final profile = QueryStringProperty<User>(_entities[0].properties[9]);
 }
 
 /// [Product] entity fields to define ObjectBox queries.

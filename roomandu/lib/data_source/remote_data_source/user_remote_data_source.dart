@@ -3,9 +3,12 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:mime/mime.dart';
 import 'package:roomandu/app/constants.dart';
+import 'package:roomandu/data_source/remote_data_source/response/user_login_response.dart';
+import 'package:roomandu/data_source/remote_data_source/response/user_reponse.dart';
 import 'package:roomandu/helper/http_service.dart';
 import 'package:roomandu/model/user.dart';
 import 'package:http_parser/http_parser.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserRemoteDataSource {
   final Dio _httpServices = HttpServices().getDioInstance();
@@ -26,7 +29,7 @@ class UserRemoteDataSource {
         "lastname": user.lastName,
         "username": user.username,
         "phone": user.phoneNumber,
-        "password" : user.password,
+        "password": user.password,
         "email": user.email,
         'profile': image,
       });
@@ -55,13 +58,52 @@ class UserRemoteDataSource {
         },
       );
       if (response.statusCode == 200) {
-        Constant.token = "Bearer ${response.data['token']}";
+        LoginResponse loginResponse = LoginResponse.fromJson(response.data);
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        Constant.userid = loginResponse.userid!;
+        prefs.setString('token', Constant.token);
+        print(loginResponse.userid!);
+        prefs.setString('userId', loginResponse.userid!);
         return true;
       } else {
         return false;
       }
     } catch (e) {
       return false;
+    }
+  }
+
+  Future<List<User>?> getuser(String userid) async {
+    try {
+      Response response = await _httpServices.get(
+        Constant.user + userid,
+      );
+      if (response.statusCode == 200) {
+        UserResponse userResponse = UserResponse.fromJson(response.data);
+  print(userResponse.data);
+        return userResponse.data;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future <List<User>?> getalluser() async {
+    try {
+      Response response = await _httpServices.get(
+        Constant.user,
+      );
+      if (response.statusCode == 200) {
+        UserResponse userResponse = UserResponse.fromJson(response.data);
+        print(userResponse.data);
+        return userResponse.data;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
     }
   }
 }

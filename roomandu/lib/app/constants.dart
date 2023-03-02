@@ -10,6 +10,7 @@ class Constant {
   // ----------------Student URL----------------
   static const String userLoginURL = "user/login";
   static const String userRegisterURL = "user/register";
+  static const String user =  "user/";
 
   // static const String userURL = "user";
   static const String userImageURL = "http://10.0.2.2:3000/uploads/";
@@ -22,4 +23,7 @@ class Constant {
 
   // For storing token or you can store token in shared preferences
   static String token = "";
+
+  // For storing user id or you can store user id in shared preferences
+  static String userid = "";
 }

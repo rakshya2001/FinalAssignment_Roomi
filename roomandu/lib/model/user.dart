@@ -1,9 +1,9 @@
-
 import 'package:json_annotation/json_annotation.dart';
 import 'package:objectbox/objectbox.dart';
 // import 'package:roomandu/model/role.dart';
 
 part "user.g.dart";
+
 @Entity()
 @JsonSerializable()
 class User {
@@ -21,15 +21,23 @@ class User {
   String? phoneNumber;
   String? password;
   String? email;
-
+  String? role;
+  String? profile;
 
   // final role= ToOne<Role>();
-  User({this.firstName, this.lastName, this.username, this.password, this.phoneNumber,this.userId,
-  this.email,
+  User(
+      {this.firstName,
+      this.lastName,
+      this.username,
+      this.password,
+      this.phoneNumber,
+      this.userId,
+      this.email,
+      this.role,
+      this.profile,
       this.uId = 0});
 
-  factory User.fromJson(Map<String, dynamic> json)=>
-  _$UserFromJson(json);
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
-  Map<String, dynamic > tojson()=> _$UserToJson(this);
+  Map<String, dynamic> tojson() => _$UserToJson(this);
 }
