@@ -60,6 +60,8 @@ dependencies:
   fluttertoast: ^6.0.1
   test_cov_console: ^0.2.2
   image_picker: ^0.8.6+3
+  shake: ^2.2.0
+  local_auth: ^2.1.5
 
 dev_dependencies:
   flutter_test:
